@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Checkout | LoseWell Coaching</title>
+  <meta name="description" content="Choose your LoseWell Coaching package and continue checkout by WhatsApp." />
+  <meta name="robots" content="noindex, follow">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --dark: #111827;
+      --muted: #6b7280;
+      --light: #f3f4f6;
+      --card: #ffffff;
+      --accent: #16a34a;
+      --accent-dark: #15803d;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .navbar-brand {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .checkout-hero {
+      background:
+        linear-gradient(135deg, rgba(17,24,39,0.94), rgba(17,24,39,0.78)),
+        radial-gradient(circle at top left, rgba(22,163,74,0.45), transparent 35%);
+      color: white;
+      padding: 80px 0;
+    }
+
+    .checkout-hero h1 {
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 0.95;
+      font-weight: 900;
+      letter-spacing: -0.07em;
+    }
+
+    .checkout-hero p {
+      color: #e5e7eb;
+      max-width: 760px;
+      font-size: 1.15rem;
+    }
+
+    .badge-custom {
+      background: rgba(22,163,74,0.15);
+      color: #bbf7d0;
+      border: 1px solid rgba(187,247,208,0.25);
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      font-weight: 800;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .checkout-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 1.6rem;
+      padding: 2rem;
+      box-shadow: 0 22px 55px rgba(15,23,42,0.08);
+    }
+
+    .summary-card {
+      background: var(--dark);
+      color: white;
+      border-radius: 1.6rem;
+      padding: 2rem;
+      position: sticky;
+      top: 90px;
+    }
+
+    .summary-card p,
+    .summary-card li {
+      color: #d1d5db;
+    }
+
+    .summary-price {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: #bbf7d0;
+    }
+
+    .form-control,
+    .form-select {
+      border-radius: 0.9rem;
+      padding: 0.85rem;
+    }
+
+    .form-label {
+      font-weight: 700;
+    }
+
+    .btn-main {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.95rem 1.3rem;
+      font-weight: 900;
+      border-radius: 0.9rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-main:hover {
+      background: var(--accent-dark);
+      color: white;
+    }
+
+    .btn-main:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .small-muted {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .warning-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+    }
+
+    .payment-box {
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+    }
+
+    .error-message {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      border-radius: 0.9rem;
+      padding: 0.9rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .footer {
+      background: var(--dark);
+      color: #d1d5db;
+      padding: 35px 0;
+    }
+
+    .footer a {
+      color: #bbf7d0;
+      text-decoration: none;
+    }
+
+    @media (max-width: 991px) {
+      .summary-card {
+        position: static;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">LoseWell Coaching</a>
+
+    <div class="ms-auto">
+      <a class="btn btn-sm btn-outline-success fw-bold" href="index.html#packages">Back to packages</a>
+    </div>
+  </div>
+</nav>
+
+<header class="checkout-hero">
+  <div class="container">
+    <span class="badge-custom">Bank transfer checkout</span>
+    <h1>Choose your coaching package.</h1>
+    <p class="mt-4">
+      Complete your details below, choose the package that suits you, then continue on WhatsApp.
+      Payment is currently taken by UK bank transfer once your package is confirmed.
+    </p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-7">
+        <div class="checkout-card">
+          <h2 class="fw-black mb-3" style="font-weight:900; letter-spacing:-0.04em;">Checkout details</h2>
+          <p class="small-muted mb-4">
+            This does not take payment online. It sends your package request to Tim on WhatsApp so payment details and onboarding questions can be confirmed.
+          </p>
+
+          <div id="errorMessage" class="error-message">
+            Please complete your name, contact details, package choice and confirm the disclaimer before continuing.
+          </div>
+
+          <form id="checkoutForm">
+            <div class="row g-3">
+
+              <div class="col-md-6">
+                <label class="form-label" for="fullName">Full name</label>
+                <input type="text" class="form-control" id="fullName" placeholder="Your full name">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="customerPhone">Phone / WhatsApp number</label>
+                <input type="tel" class="form-control" id="customerPhone" placeholder="Your mobile number">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="customerEmail">Email</label>
+                <input type="email" class="form-control" id="customerEmail" placeholder="you@email.com">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="packageSelect">Choose package</label>
+                <select class="form-select" id="packageSelect">
+                  <option value="">Select one</option>
+                  <option value="Gym Confidence Starter" data-price="50">£50 - Gym Confidence Starter</option>
+                  <option value="Fat Loss Blueprint" data-price="90">£90 - Fat Loss Blueprint</option>
+                  <option value="Training Plan Build" data-price="100">£100 - Training Plan Build</option>
+                  <option value="Full Reset Plan" data-price="120">£120 - Full Reset Plan</option>
+                  <option value="4-Week Coaching Support" data-price="150">£150 - 4-Week Coaching Support</option>
+                  <option value="Complete Transformation Month" data-price="180">£180 - Complete Transformation Month</option>
+                  <option value="Custom Package" data-price="Custom">Custom Package</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="mainGoal">Main goal</label>
+                <select class="form-select" id="mainGoal">
+                  <option value="">Select one</option>
+                  <option>Lose fat</option>
+                  <option>Build muscle</option>
+                  <option>Get gym confident</option>
+                  <option>Improve cardio</option>
+                  <option>General transformation</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="experienceLevel">Training experience</label>
+                <select class="form-select" id="experienceLevel">
+                  <option value="">Select one</option>
+                  <option>Complete beginner</option>
+                  <option>Some gym experience</option>
+                  <option>Currently training</option>
+                  <option>Returning after a break</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" for="helpNeeded">What do you need help with?</label>
+                <textarea class="form-control" id="helpNeeded" rows="5" placeholder="Example: I want to lose weight but I don’t know what to eat or what to do in the gym..."></textarea>
+              </div>
+
+              <div class="col-12">
+                <div class="payment-box">
+                  <h3 class="h5 fw-bold">Payment by bank transfer</h3>
+                  <p class="mb-0">
+                    After you submit this request on WhatsApp, you’ll receive bank transfer details and a clear payment reference.
+                    Your plan or coaching setup begins once payment has been received.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="warning-box">
+                  <h3 class="h5 fw-bold">Important disclaimer</h3>
+                  <p>
+                    LoseWell Coaching provides general fitness, lifestyle, habit and educational support only.
+                    It is not medical advice, nutritional therapy, diagnosis, treatment or prescribing.
+                  </p>
+                  <p class="mb-0">
+                    If you have a medical condition, take medication, use weight-loss medication, use peptides,
+                    or are unsure whether training or diet changes are suitable for you, speak to a qualified healthcare professional.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="disclaimerCheck">
+                  <label class="form-check-label" for="disclaimerCheck">
+                    I understand this is general coaching and educational support only, not medical advice.
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button type="button" id="whatsappCheckout" class="btn btn-main w-100">
+                  Continue checkout on WhatsApp
+                </button>
+
+                <p class="small-muted mt-3 mb-0">
+                  You will be taken to WhatsApp with your package request already written out.
+                </p>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="summary-card">
+          <h2 class="fw-bold mb-3">Order summary</h2>
+
+          <p class="mb-1">Selected package:</p>
+          <h3 id="summaryPackage" class="fw-bold">No package selected</h3>
+
+          <div id="summaryPrice" class="summary-price mt-3">£0</div>
+
+          <hr class="border-secondary my-4">
+
+          <h4 class="fw-bold">What happens next?</h4>
+
+          <ol class="ps-3">
+            <li>Choose your package and complete your details.</li>
+            <li>Continue to WhatsApp with your request.</li>
+            <li>Tim confirms the best option and sends payment details.</li>
+            <li>Once payment is received, onboarding questions are sent.</li>
+            <li>Your plan or coaching setup begins.</li>
+          </ol>
+
+          <hr class="border-secondary my-4">
+
+          <p class="mb-0">
+            Payment method: <strong>UK bank transfer</strong><br>
+            Processing fees: <strong>None</strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-8">
+        <h4 class="text-white">LoseWell Coaching</h4>
+        <p class="mb-0">
+          Real-world fat loss, gym confidence and transformation support.
+        </p>
+      </div>
+
+      <div class="col-md-4 text-md-end">
+        <p class="mb-1"><a href="index.html">Home</a></p>
+        <p class="mb-0 small">© 2026 LoseWell Coaching. All rights reserved.</p>
+      </div>
+    </div>
+
+    <hr class="border-secondary my-4">
+
+    <p class="small mb-0">
+      Disclaimer: This service provides general fitness, lifestyle and educational support only.
+      It is not medical advice, nutritional therapy, diagnosis, treatment or prescribing.
+      Always speak to a qualified healthcare professional before making decisions involving medical conditions,
+      medication, weight-loss drugs, peptides, injections or significant dietary changes.
+    </p>
+  </div>
+</footer>
+
+<script>
+  const packageSelect = document.getElementById("packageSelect");
+  const summaryPackage = document.getElementById("summaryPackage");
+  const summaryPrice = document.getElementById("summaryPrice");
+  const whatsappCheckout = document.getElementById("whatsappCheckout");
+  const errorMessage = document.getElementById("errorMessage");
+
+  const timWhatsAppNumber = "447532766226";
+
+  function updateSummary() {
+    const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+    const packageName = selectedOption.value;
+    const packagePrice = selectedOption.dataset.price;
+
+    if (!packageName) {
+      summaryPackage.textContent = "No package selected";
+      summaryPrice.textContent = "£0";
+      return;
+    }
+
+    summaryPackage.textContent = packageName;
+
+    if (packagePrice === "Custom") {
+      summaryPrice.textContent = "Custom";
+    } else {
+      summaryPrice.textContent = "£" + packagePrice;
+    }
+  }
+
+  packageSelect.addEventListener("change", updateSummary);
+
+  whatsappCheckout.addEventListener("click", function () {
+    const fullName = document.getElementById("fullName").value.trim();
+    const customerPhone = document.getElementById("customerPhone").value.trim();
+    const customerEmail = document.getElementById("customerEmail").value.trim();
+    const mainGoal = document.getElementById("mainGoal").value;
+    const experienceLevel = document.getElementById("experienceLevel").value;
+    const helpNeeded = document.getElementById("helpNeeded").value.trim();
+    const disclaimerCheck = document.getElementById("disclaimerCheck").checked;
+
+    const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+    const packageName = selectedOption.value;
+    const packagePrice = selectedOption.dataset.price;
+
+    if (!fullName || !customerPhone || !customerEmail || !packageName || !mainGoal || !experienceLevel || !disclaimerCheck) {
+      errorMessage.style.display = "block";
+      window.scrollTo({ top: errorMessage.offsetTop - 120, behavior: "smooth" });
+      return;
+    }
+
+    errorMessage.style.display = "none";
+
+    const priceText = packagePrice === "Custom" ? "Custom Package" : "£" + packagePrice;
+
+    const message =
+      "Hi Tim, I would like to start with LoseWell Coaching.%0A%0A" +
+      "Name: " + encodeURIComponent(fullName) + "%0A" +
+      "Phone: " + encodeURIComponent(customerPhone) + "%0A" +
+      "Email: " + encodeURIComponent(customerEmail) + "%0A%0A" +
+      "Package: " + encodeURIComponent(packageName) + "%0A" +
+      "Price: " + encodeURIComponent(priceText) + "%0A" +
+      "Main goal: " + encodeURIComponent(mainGoal) + "%0A" +
+      "Training experience: " + encodeURIComponent(experienceLevel) + "%0A%0A" +
+      "What I need help with:%0A" + encodeURIComponent(helpNeeded || "Not added") + "%0A%0A" +
+      "I understand LoseWell Coaching is general fitness, lifestyle and educational support only, not medical advice.%0A%0A" +
+      "Please send me the onboarding questions and bank transfer payment details.";
+
+    const whatsappUrl = "https://wa.me/" + timWhatsAppNumber + "?text=" + message;
+    window.open(whatsappUrl, "_blank");
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
