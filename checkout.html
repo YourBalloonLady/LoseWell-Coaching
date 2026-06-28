@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Checkout | LoseWell Coaching</title>
-  <meta name="description" content="Choose your LoseWell Coaching package and continue checkout by WhatsApp." />
+  <meta name="description" content="Choose your LoseWell Coaching package and complete your bank transfer checkout request." />
   <meta name="robots" content="noindex, follow">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,6 +18,7 @@
       --card: #ffffff;
       --accent: #16a34a;
       --accent-dark: #15803d;
+      --danger: #dc2626;
     }
 
     body {
@@ -166,6 +167,17 @@
       font-weight: 700;
     }
 
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      color: #065f46;
+      border-radius: 1.2rem;
+      padding: 1.4rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
     .footer {
       background: var(--dark);
       color: #d1d5db;
@@ -199,11 +211,11 @@
 
 <header class="checkout-hero">
   <div class="container">
-    <span class="badge-custom">Bank transfer checkout</span>
-    <h1>Choose your coaching package.</h1>
+    <span class="badge-custom">Secure enquiry checkout</span>
+    <h1>Complete your coaching request.</h1>
     <p class="mt-4">
-      Complete your details below, choose the package that suits you, then continue on WhatsApp.
-      Payment is currently taken by UK bank transfer once your package is confirmed.
+      Choose your package and submit your details. You’ll receive an email with the next steps,
+      bank transfer details and your payment reference.
     </p>
   </div>
 </header>
@@ -216,34 +228,43 @@
         <div class="checkout-card">
           <h2 class="fw-black mb-3" style="font-weight:900; letter-spacing:-0.04em;">Checkout details</h2>
           <p class="small-muted mb-4">
-            This does not take payment online. It sends your package request to Tim on WhatsApp so payment details and onboarding questions can be confirmed.
+            No card payment is taken on this page. Your request is submitted securely and payment is completed by UK bank transfer.
           </p>
 
+          <div id="successMessage" class="success-message">
+            Your LoseWell Coaching request has been submitted. Please check your email for the bank transfer details and next steps.
+          </div>
+
           <div id="errorMessage" class="error-message">
-            Please complete your name, contact details, package choice and confirm the disclaimer before continuing.
+            Please complete your name, phone, email, package choice, goal, experience level and confirm the disclaimer before submitting.
           </div>
 
           <form id="checkoutForm">
             <div class="row g-3">
 
+              <input type="hidden" id="orderRef" name="order_ref">
+              <input type="hidden" id="packageNameHidden" name="package_name">
+              <input type="hidden" id="packagePriceHidden" name="package_price">
+              <input type="hidden" id="paymentReferenceHidden" name="payment_reference">
+
               <div class="col-md-6">
                 <label class="form-label" for="fullName">Full name</label>
-                <input type="text" class="form-control" id="fullName" placeholder="Your full name">
+                <input type="text" class="form-control" id="fullName" name="customer_name" placeholder="Your full name">
               </div>
 
               <div class="col-md-6">
                 <label class="form-label" for="customerPhone">Phone / WhatsApp number</label>
-                <input type="tel" class="form-control" id="customerPhone" placeholder="Your mobile number">
+                <input type="tel" class="form-control" id="customerPhone" name="customer_phone" placeholder="Your mobile number">
               </div>
 
               <div class="col-md-6">
                 <label class="form-label" for="customerEmail">Email</label>
-                <input type="email" class="form-control" id="customerEmail" placeholder="you@email.com">
+                <input type="email" class="form-control" id="customerEmail" name="customer_email" placeholder="you@email.com">
               </div>
 
               <div class="col-md-6">
                 <label class="form-label" for="packageSelect">Choose package</label>
-                <select class="form-select" id="packageSelect">
+                <select class="form-select" id="packageSelect" name="package_select">
                   <option value="">Select one</option>
                   <option value="Gym Confidence Starter" data-price="50">£50 - Gym Confidence Starter</option>
                   <option value="Fat Loss Blueprint" data-price="90">£90 - Fat Loss Blueprint</option>
@@ -257,7 +278,7 @@
 
               <div class="col-md-6">
                 <label class="form-label" for="mainGoal">Main goal</label>
-                <select class="form-select" id="mainGoal">
+                <select class="form-select" id="mainGoal" name="main_goal">
                   <option value="">Select one</option>
                   <option>Lose fat</option>
                   <option>Build muscle</option>
@@ -270,7 +291,7 @@
 
               <div class="col-md-6">
                 <label class="form-label" for="experienceLevel">Training experience</label>
-                <select class="form-select" id="experienceLevel">
+                <select class="form-select" id="experienceLevel" name="experience_level">
                   <option value="">Select one</option>
                   <option>Complete beginner</option>
                   <option>Some gym experience</option>
@@ -281,16 +302,26 @@
               </div>
 
               <div class="col-12">
+                <label class="form-label" for="preferredContact">Preferred contact method</label>
+                <select class="form-select" id="preferredContact" name="preferred_contact">
+                  <option>WhatsApp</option>
+                  <option>Phone call</option>
+                  <option>Email</option>
+                  <option>No preference</option>
+                </select>
+              </div>
+
+              <div class="col-12">
                 <label class="form-label" for="helpNeeded">What do you need help with?</label>
-                <textarea class="form-control" id="helpNeeded" rows="5" placeholder="Example: I want to lose weight but I don’t know what to eat or what to do in the gym..."></textarea>
+                <textarea class="form-control" id="helpNeeded" name="help_needed" rows="5" placeholder="Example: I want to lose weight but I don’t know what to eat or what to do in the gym..."></textarea>
               </div>
 
               <div class="col-12">
                 <div class="payment-box">
                   <h3 class="h5 fw-bold">Payment by bank transfer</h3>
                   <p class="mb-0">
-                    After you submit this request on WhatsApp, you’ll receive bank transfer details and a clear payment reference.
-                    Your plan or coaching setup begins once payment has been received.
+                    After submitting, you’ll receive an automatic email with bank transfer details,
+                    your payment reference and what happens next. Your plan or coaching setup begins once payment has been received.
                   </p>
                 </div>
               </div>
@@ -311,7 +342,7 @@
 
               <div class="col-12">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="disclaimerCheck">
+                  <input class="form-check-input" type="checkbox" value="Accepted" id="disclaimerCheck" name="disclaimer_accepted">
                   <label class="form-check-label" for="disclaimerCheck">
                     I understand this is general coaching and educational support only, not medical advice.
                   </label>
@@ -319,12 +350,12 @@
               </div>
 
               <div class="col-12">
-                <button type="button" id="whatsappCheckout" class="btn btn-main w-100">
-                  Continue checkout on WhatsApp
+                <button type="button" id="submitCheckout" class="btn btn-main w-100">
+                  Submit checkout request
                 </button>
 
                 <p class="small-muted mt-3 mb-0">
-                  You will be taken to WhatsApp with your package request already written out.
+                  You’ll receive an email with bank transfer details and next steps after submitting.
                 </p>
               </div>
 
@@ -344,12 +375,17 @@
 
           <hr class="border-secondary my-4">
 
+          <p class="mb-1">Payment reference:</p>
+          <h4 id="summaryReference" class="fw-bold text-white">Generated at checkout</h4>
+
+          <hr class="border-secondary my-4">
+
           <h4 class="fw-bold">What happens next?</h4>
 
           <ol class="ps-3">
-            <li>Choose your package and complete your details.</li>
-            <li>Continue to WhatsApp with your request.</li>
-            <li>Tim confirms the best option and sends payment details.</li>
+            <li>You submit your checkout request.</li>
+            <li>You receive an email with bank details and payment reference.</li>
+            <li>Tim receives your details and checks the best contact method.</li>
             <li>Once payment is received, onboarding questions are sent.</li>
             <li>Your plan or coaching setup begins.</li>
           </ol>
@@ -394,14 +430,64 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
+  /*
+    EMAILJS SETUP:
+    Replace these placeholder values with your real EmailJS details.
+
+    You need two templates:
+    1) Admin notification template - sent to you
+    2) Customer confirmation template - sent to the customer
+  */
+
+  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+  const EMAILJS_ADMIN_TEMPLATE_ID = "YOUR_ADMIN_TEMPLATE_ID";
+  const EMAILJS_CUSTOMER_TEMPLATE_ID = "YOUR_CUSTOMER_TEMPLATE_ID";
+
+  /*
+    BANK DETAILS:
+    Replace these with your real payment details before going live.
+    Do not leave placeholders on the live site.
+  */
+
+  const BANK_ACCOUNT_NAME = "YOUR ACCOUNT NAME";
+  const BANK_SORT_CODE = "00-00-00";
+  const BANK_ACCOUNT_NUMBER = "00000000";
+  const BANK_PAYMENT_NOTE = "Please use your payment reference exactly as shown.";
+
+  emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY
+  });
+
   const packageSelect = document.getElementById("packageSelect");
   const summaryPackage = document.getElementById("summaryPackage");
   const summaryPrice = document.getElementById("summaryPrice");
-  const whatsappCheckout = document.getElementById("whatsappCheckout");
+  const summaryReference = document.getElementById("summaryReference");
+  const submitCheckout = document.getElementById("submitCheckout");
   const errorMessage = document.getElementById("errorMessage");
+  const successMessage = document.getElementById("successMessage");
 
-  const timWhatsAppNumber = "447532766226";
+  const orderRefInput = document.getElementById("orderRef");
+  const packageNameHidden = document.getElementById("packageNameHidden");
+  const packagePriceHidden = document.getElementById("packagePriceHidden");
+  const paymentReferenceHidden = document.getElementById("paymentReferenceHidden");
+
+  function generateOrderRef() {
+    const now = new Date();
+    const year = String(now.getFullYear()).slice(-2);
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const random = Math.floor(1000 + Math.random() * 9000);
+    return "LW-" + year + month + day + "-" + random;
+  }
+
+  const orderRef = generateOrderRef();
+  orderRefInput.value = orderRef;
+  paymentReferenceHidden.value = orderRef;
+  summaryReference.textContent = orderRef;
 
   function updateSummary() {
     const selectedOption = packageSelect.options[packageSelect.selectedIndex];
@@ -411,26 +497,47 @@
     if (!packageName) {
       summaryPackage.textContent = "No package selected";
       summaryPrice.textContent = "£0";
+      packageNameHidden.value = "";
+      packagePriceHidden.value = "";
       return;
     }
 
     summaryPackage.textContent = packageName;
+    packageNameHidden.value = packageName;
 
     if (packagePrice === "Custom") {
       summaryPrice.textContent = "Custom";
+      packagePriceHidden.value = "Custom";
     } else {
       summaryPrice.textContent = "£" + packagePrice;
+      packagePriceHidden.value = "£" + packagePrice;
     }
   }
 
   packageSelect.addEventListener("change", updateSummary);
 
-  whatsappCheckout.addEventListener("click", function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const packageFromUrl = urlParams.get("package");
+
+  if (packageFromUrl) {
+    for (let i = 0; i < packageSelect.options.length; i++) {
+      const option = packageSelect.options[i];
+
+      if (option.dataset.price === packageFromUrl || option.dataset.price === "Custom" && packageFromUrl === "custom") {
+        packageSelect.selectedIndex = i;
+        updateSummary();
+        break;
+      }
+    }
+  }
+
+  submitCheckout.addEventListener("click", async function () {
     const fullName = document.getElementById("fullName").value.trim();
     const customerPhone = document.getElementById("customerPhone").value.trim();
     const customerEmail = document.getElementById("customerEmail").value.trim();
     const mainGoal = document.getElementById("mainGoal").value;
     const experienceLevel = document.getElementById("experienceLevel").value;
+    const preferredContact = document.getElementById("preferredContact").value;
     const helpNeeded = document.getElementById("helpNeeded").value.trim();
     const disclaimerCheck = document.getElementById("disclaimerCheck").checked;
 
@@ -439,6 +546,7 @@
     const packagePrice = selectedOption.dataset.price;
 
     if (!fullName || !customerPhone || !customerEmail || !packageName || !mainGoal || !experienceLevel || !disclaimerCheck) {
+      successMessage.style.display = "none";
       errorMessage.style.display = "block";
       window.scrollTo({ top: errorMessage.offsetTop - 120, behavior: "smooth" });
       return;
@@ -448,21 +556,69 @@
 
     const priceText = packagePrice === "Custom" ? "Custom Package" : "£" + packagePrice;
 
-    const message =
-      "Hi Tim, I would like to start with LoseWell Coaching.%0A%0A" +
-      "Name: " + encodeURIComponent(fullName) + "%0A" +
-      "Phone: " + encodeURIComponent(customerPhone) + "%0A" +
-      "Email: " + encodeURIComponent(customerEmail) + "%0A%0A" +
-      "Package: " + encodeURIComponent(packageName) + "%0A" +
-      "Price: " + encodeURIComponent(priceText) + "%0A" +
-      "Main goal: " + encodeURIComponent(mainGoal) + "%0A" +
-      "Training experience: " + encodeURIComponent(experienceLevel) + "%0A%0A" +
-      "What I need help with:%0A" + encodeURIComponent(helpNeeded || "Not added") + "%0A%0A" +
-      "I understand LoseWell Coaching is general fitness, lifestyle and educational support only, not medical advice.%0A%0A" +
-      "Please send me the onboarding questions and bank transfer payment details.";
+    packageNameHidden.value = packageName;
+    packagePriceHidden.value = priceText;
+    paymentReferenceHidden.value = orderRef;
 
-    const whatsappUrl = "https://wa.me/" + timWhatsAppNumber + "?text=" + message;
-    window.open(whatsappUrl, "_blank");
+    const templateParams = {
+      order_ref: orderRef,
+      payment_reference: orderRef,
+
+      customer_name: fullName,
+      customer_phone: customerPhone,
+      customer_email: customerEmail,
+      to_email: customerEmail,
+
+      package_name: packageName,
+      package_price: priceText,
+      main_goal: mainGoal,
+      experience_level: experienceLevel,
+      preferred_contact: preferredContact,
+      help_needed: helpNeeded || "Not added",
+
+      bank_account_name: BANK_ACCOUNT_NAME,
+      bank_sort_code: BANK_SORT_CODE,
+      bank_account_number: BANK_ACCOUNT_NUMBER,
+      bank_payment_note: BANK_PAYMENT_NOTE,
+
+      disclaimer_accepted: "Yes"
+    };
+
+    submitCheckout.disabled = true;
+    submitCheckout.textContent = "Submitting...";
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_ADMIN_TEMPLATE_ID,
+        templateParams
+      );
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_CUSTOMER_TEMPLATE_ID,
+        templateParams
+      );
+
+      document.getElementById("checkoutForm").reset();
+      summaryPackage.textContent = "Request submitted";
+      summaryPrice.textContent = priceText;
+      successMessage.style.display = "block";
+      errorMessage.style.display = "none";
+
+      window.scrollTo({ top: successMessage.offsetTop - 120, behavior: "smooth" });
+
+      submitCheckout.textContent = "Request submitted";
+    } catch (error) {
+      console.error("EmailJS error:", error);
+
+      errorMessage.textContent = "Something went wrong submitting your request. Please try again or contact Tim directly.";
+      errorMessage.style.display = "block";
+      successMessage.style.display = "none";
+
+      submitCheckout.disabled = false;
+      submitCheckout.textContent = "Submit checkout request";
+    }
   });
 </script>
 
