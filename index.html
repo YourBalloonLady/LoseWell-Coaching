@@ -295,7 +295,7 @@
         </p>
 
         <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
-          <a href="#contact" class="btn btn-main">Apply for coaching</a>
+          <a href="checkout.html" class="btn btn-main">Apply for coaching</a>
           <a href="#packages" class="btn btn-outline-light-custom">View packages</a>
         </div>
 
@@ -424,7 +424,7 @@
             <li>Basic progression advice</li>
           </ul>
 
-          <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20the%20%C2%A350%20Gym%20Confidence%20Starter%20package" class="btn btn-main w-100" target="_blank" rel="noopener">
+          <a href="checkout.html?package=50" class="btn btn-main w-100">
             Choose £50 package
           </a>
         </div>
@@ -445,7 +445,7 @@
             <li>Weekly progress tracking guide</li>
           </ul>
 
-          <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20the%20%C2%A390%20Fat%20Loss%20Blueprint%20package" class="btn btn-main w-100" target="_blank" rel="noopener">
+          <a href="checkout.html?package=90" class="btn btn-main w-100">
             Choose £90 package
           </a>
         </div>
@@ -466,7 +466,7 @@
             <li>Progression and adjustment notes</li>
           </ul>
 
-          <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20the%20%C2%A3100%20Training%20Plan%20Build%20package" class="btn btn-main w-100" target="_blank" rel="noopener">
+          <a href="checkout.html?package=100" class="btn btn-main w-100">
             Choose £100 package
           </a>
         </div>
@@ -487,7 +487,7 @@
             <li>Progress tracking setup</li>
           </ul>
 
-          <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20the%20%C2%A3120%20Full%20Reset%20Plan%20package" class="btn btn-main w-100" target="_blank" rel="noopener">
+          <a href="checkout.html?package=120" class="btn btn-main w-100">
             Choose £120 package
           </a>
         </div>
@@ -508,7 +508,7 @@
             <li>Progress review at the end</li>
           </ul>
 
-          <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20the%20%C2%A3150%204-Week%20Coaching%20Support%20package" class="btn btn-main w-100" target="_blank" rel="noopener">
+          <a href="checkout.html?package=150" class="btn btn-main w-100">
             Choose £150 package
           </a>
         </div>
@@ -531,7 +531,7 @@
             <li>Modern weight-loss education included</li>
           </ul>
 
-          <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20the%20%C2%A3180%20Complete%20Transformation%20Month%20package" class="btn btn-main w-100" target="_blank" rel="noopener">
+          <a href="checkout.html?package=180" class="btn btn-main w-100">
             Choose £180 package
           </a>
         </div>
@@ -550,7 +550,7 @@
             </div>
 
             <div class="col-lg-4">
-              <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20a%20custom%20LoseWell%20Coaching%20package" class="btn btn-main w-100" target="_blank" rel="noopener">
+              <a href="checkout.html?package=custom" class="btn btn-main w-100">
                 Ask about custom package
               </a>
             </div>
@@ -706,16 +706,17 @@
 
             <div class="col-md-6">
               <label class="form-label">Package interested in</label>
-              <select class="form-select">
-                <option selected>Select one</option>
-                <option>£50 - Gym Confidence Starter</option>
-                <option>£90 - Fat Loss Blueprint</option>
-                <option>£100 - Training Plan Build</option>
-                <option>£120 - Full Reset Plan</option>
-                <option>£150 - 4-Week Coaching Support</option>
-                <option>£180 - Complete Transformation Month</option>
-                <option>Custom Package</option>
-                <option>Not sure yet</option>
+
+              <select class="form-select" id="packageInterested">
+                <option value="" selected>Select one</option>
+                <option value="50">£50 - Gym Confidence Starter</option>
+                <option value="90">£90 - Fat Loss Blueprint</option>
+                <option value="100">£100 - Training Plan Build</option>
+                <option value="120">£120 - Full Reset Plan</option>
+                <option value="150">£150 - 4-Week Coaching Support</option>
+                <option value="180">£180 - Complete Transformation Month</option>
+                <option value="custom">Custom Package</option>
+                <option value="not-sure">Not sure yet</option>
               </select>
             </div>
 
@@ -725,12 +726,12 @@
             </div>
 
             <div class="col-12">
-              <a href="https://wa.me/447532766226?text=Hi%20Tim%2C%20I%27m%20interested%20in%20LoseWell%20Coaching.%20Can%20you%20send%20me%20the%20onboarding%20questions%20and%20payment%20details%3F" class="btn btn-main w-100" target="_blank" rel="noopener">
-                Continue on WhatsApp
-              </a>
+              <button type="button" class="btn btn-main w-100" onclick="goToCheckout()">
+                Continue to checkout
+              </button>
 
               <p class="small-muted mt-3 mb-0">
-                Online form submission is being added soon. For now, WhatsApp is the fastest way to apply.
+                Choose a package above, then continue to the checkout page. Payment is by UK bank transfer once confirmed.
               </p>
             </div>
           </div>
@@ -766,6 +767,24 @@
     </p>
   </div>
 </footer>
+
+<script>
+  function goToCheckout() {
+    const selectedPackage = document.getElementById("packageInterested").value;
+
+    if (!selectedPackage) {
+      alert("Please choose a package first.");
+      return;
+    }
+
+    if (selectedPackage === "not-sure") {
+      window.location.href = "checkout.html";
+      return;
+    }
+
+    window.location.href = "checkout.html?package=" + encodeURIComponent(selectedPackage);
+  }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
